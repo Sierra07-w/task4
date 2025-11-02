@@ -16,21 +16,19 @@ This Java project implements several fundamental graph algorithms, including **t
      ├── KahnTopo.java
      ├── Main.java
      └── TarjanSCC.java
-
- └── resources/
+     └── resources/
         └── data/
            ├── small1.json
-├── small2.json
-├── small3.json
-├── medium1.json
-├── medium2.json
-├── medium3.json
-├── large1.json
-├── large2.json
-└── large3.json
-
-└──test/
-    └── java/
+           ├── small2.json
+           ├── small3.json
+           ├── medium1.json
+           ├── medium2.json
+           ├── medium3.json
+           ├── large1.json
+           ├── large2.json
+           └── large3.json
+    └──test/
+     └── java/
         └── org/example/
          ├── DAGShortestLongestTest.java
          ├── SCCFinderTest.java
