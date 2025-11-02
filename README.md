@@ -6,17 +6,20 @@ This Java project implements several fundamental graph algorithms, including **t
 
 ## 📂 Project Structure
 
-main/java/org/example/
-├── Condensation.java
-├── DAGShortestLongest.java
-├── Graph.java
-├── GraphReader.java
-├── KahnTopo.java
-├── Main.java
-└── TarjanSCC.java
+    └── main/
+      └── java/
+         └── org/example/
+     ├── Condensation.java
+     ├── DAGShortestLongest.java
+     ├── Graph.java
+     ├── GraphReader.java
+     ├── KahnTopo.java
+     ├── Main.java
+     └── TarjanSCC.java
 
-resources/data/
-├── small1.json
+ └── resources/
+        └── data/
+           ├── small1.json
 ├── small2.json
 ├── small3.json
 ├── medium1.json
@@ -26,10 +29,12 @@ resources/data/
 ├── large2.json
 └── large3.json
 
-test/java/org/example/
-├── DAGShortestLongestTest.java
-├── SCCFinderTest.java
-└── TopoSortTest.java
+└──test/
+    └── java/
+        └── org/example/
+         ├── DAGShortestLongestTest.java
+         ├── SCCFinderTest.java
+         └── TopoSortTest.java
 
 ---
 
