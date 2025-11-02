@@ -1,27 +1,60 @@
-package graph.topo;
-
+package org.example;
 import java.util.*;
 
-public class SimpleTopoSort {
-    public List<Integer> topologicalSort(Map<Integer, List<int[]>> graph) {
-        Map<Integer, Integer> indegree = new HashMap<>();
-        for (int u : graph.keySet()) {
-            indegree.putIfAbsent(u, 0);
-            for (int[] e : graph.get(u))
-                indegree.put(e[0], indegree.getOrDefault(e[0], 0) + 1);
+public class TarjanSCC {
+    private Graph g;
+    private int time = 0;
+    private int dfsVisits = 0, dfsEdges = 0;
+    private int[] disc, low;
+    private boolean[] onStack;
+    private Deque<Integer> stack = new ArrayDeque<>();
+    private List<List<Integer>> sccList = new ArrayList<>();
+
+    public TarjanSCC(Graph g) {
+        this.g = g;
+        int n = g.n;
+        disc = new int[n];
+        low = new int[n];
+        onStack = new boolean[n];
+    }
+
+    public List<List<Integer>> run() {
+        for (int i = 0; i < g.n; i++) {
+            if (disc[i] == 0) dfs(i);
         }
-        Queue<Integer> q = new LinkedList<>();
-        for (int node : indegree.keySet())
-            if (indegree.get(node) == 0) q.add(node);
-        List<Integer> res = new ArrayList<>();
-        while (!q.isEmpty()) {
-            int u = q.poll();
-            res.add(u);
-            for (int[] e : graph.getOrDefault(u, new ArrayList<>())) {
-                indegree.put(e[0], indegree.get(e[0]) - 1);
-                if (indegree.get(e[0]) == 0) q.add(e[0]);
+        return sccList;
+    }
+
+    private void dfs(int u) {
+        disc[u] = low[u] = ++time;
+        stack.push(u);
+        onStack[u] = true;
+        dfsVisits++;
+
+        for (int[] e : g.adj.get(u)) {
+            int v = e[0];
+            dfsEdges++;
+            if (disc[v] == 0) {
+                dfs(v);
+                low[u] = Math.min(low[u], low[v]);
+            } else if (onStack[v]) {
+                low[u] = Math.min(low[u], disc[v]);
             }
         }
-        return res;
+
+        if (low[u] == disc[u]) {
+            List<Integer> comp = new ArrayList<>();
+            int v;
+            do {
+                v = stack.pop();
+                onStack[v] = false;
+                comp.add(v);
+            } while (v != u);
+            sccList.add(comp);
+        }
     }
+
+    public int getDfsVisits() { return dfsVisits; }
+    public int getDfsEdges() { return dfsEdges; }
+
 }
